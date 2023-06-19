@@ -1,16 +1,13 @@
+import { not } from 'wdio-wait-for';
+import Page from './page';
 
-
-const Page = require('./page');
-
-/**
- * sub page containing specific selectors and methods for a specific page
- */
 class LoginPage extends Page {
-    /**
-     * define selectors using getter methods
-     */
+    get mainTitle () {
+        return $('#root > div > div.login_logo');
+    }
+
     get inputUsername () {
-        return $('#username');
+        return $('#user-name');
     }
 
     get inputPassword () {
@@ -18,25 +15,22 @@ class LoginPage extends Page {
     }
 
     get btnSubmit () {
-        return $('button[type="submit"]');
+        return $('#login-button');
     }
 
-    /**
-     * a method to encapsule automation code to interact with the page
-     * e.g. to login using username and password
-     */
+    get fieldsRequired () {
+        return $('#login_button_container > div > form > div.error-message-container.error > h3');
+    }
+
     async login (username, password) {
         await this.inputUsername.setValue(username);
         await this.inputPassword.setValue(password);
         await this.btnSubmit.click();
     }
 
-    /**
-     * overwrite specific options to adapt it to page object
-     */
     open () {
         return super.open('login');
     }
 }
 
-module.exports = new LoginPage();
+export default new LoginPage;
