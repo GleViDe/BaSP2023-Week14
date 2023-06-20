@@ -13,10 +13,16 @@ describe('My Correct Login', () => {
         await expect(LoginPage.btnSubmit).toBeDisplayed();
     });
 
-    it('should login with standard credentials', async () => {
+    it('should login with standard credentials and in less than 2 seconds', async () => {
+        const startTime = new Date().getTime();
+
         await LoginPage.login('standard_user', 'secret_sauce');
         const currentUrl = await browser.getUrl();
         expect(currentUrl).toEqual('https://www.saucedemo.com/inventory.html');
+
+        const endTime = new Date().getTime();
+        const elapsedTime = endTime - startTime;
+        expect(elapsedTime).toBeLessThanOrEqual(2000);
     });
 
     it('should retrieve the correct data from standard user view', async () => {
