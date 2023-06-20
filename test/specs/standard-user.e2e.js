@@ -39,16 +39,16 @@ describe('My Incorrect Login', () => {
 
     it('should show an error for fields required', async () => {
         await LoginPage.login('', '');
-        await expect(LoginPage.fieldsRequired).toHaveTextContaining('Epic sadface: Username is required');
+        await expect(LoginPage.errorContainer).toHaveTextContaining('Epic sadface: Username is required');
     });
 
     it('should show an error for password required', async () => {
         await LoginPage.login('manolo', '');
-        await expect(LoginPage.fieldsRequired).toHaveTextContaining('Epic sadface: Password is required');
+        await expect(LoginPage.errorContainer).toHaveTextContaining('Epic sadface: Password is required');
     });
 
     it('should show an error for username and password do not match', async () => {
         await LoginPage.login('manolo', 'password');
-        await expect(LoginPage.fieldsRequired).toHaveTextContaining('Epic sadface: Username and password do not match any user in this service');
+        await expect(LoginPage.errorContainer).toHaveTextContaining('Epic sadface: Username and password do not match any user in this service');
     });
 });

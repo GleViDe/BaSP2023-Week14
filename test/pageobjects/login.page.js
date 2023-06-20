@@ -18,7 +18,7 @@ class LoginPage extends Page {
         return $('#login-button');
     }
 
-    get fieldsRequired () {
+    get errorContainer () {
         return $('#login_button_container > div > form > div.error-message-container.error > h3');
     }
 

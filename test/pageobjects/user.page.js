@@ -23,6 +23,10 @@ class UserPage {
         return $('#inventory_container > div');
     }
 
+    get invItems() {
+        return $$('#inventory_container > div')
+    }
+
     get twitter() {
         return $('#page_wrapper > footer > ul > li.social_twitter > a');
     }

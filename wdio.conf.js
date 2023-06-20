@@ -24,7 +24,8 @@ exports.config = {
     //
     specs: [
         './test/pageobjects/*.js',
-        './test/specs/standard-user.e2e.js'
+        './test/specs/standard-user.e2e.js',
+        './test/specs/locked-out-user.e2e.js'
     ],
     // Patterns to exclude.
     exclude: [
