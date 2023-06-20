@@ -24,7 +24,7 @@ class UserPage {
     }
 
     get invItems() {
-        return $$('#inventory_container > div')
+        return $('#inventory_container > div').$$('.inventory_item');
     }
 
     get twitter() {

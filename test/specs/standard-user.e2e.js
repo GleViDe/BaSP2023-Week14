@@ -1,5 +1,6 @@
 import LoginPage from '../pageobjects/login.page';
-import UserPage from '../pageobjects/user.page'
+import UserPage from '../pageobjects/user.page';
+import InvElementPage from '../pageobjects/inv.element.page';
 
 describe('My Correct Login', () => {
     beforeAll('Visit Main Page', () => {
@@ -29,6 +30,31 @@ describe('My Correct Login', () => {
         await expect(UserPage.facebook).toBeDisplayed();
         await expect(UserPage.linkedin).toBeDisplayed();
         await expect(UserPage.footerText).toHaveTextContaining('© 2023 Sauce Labs. All Rights Reserved. Terms of Service | Privacy Policy');
+    });
+
+    it('the image in the list of elements should match the image of the element itself', async () => {
+        const invLength = await UserPage.invItems.length;
+        for (let i = 0; i < invLength; i++) {
+            const imgElemtList = await UserPage.invItems[i].$('img').getAttribute('src');
+            const elemtTitle = await UserPage.invItems[i].$('.inventory_item_name');
+            await elemtTitle.click();
+            await InvElementPage.elemtImg.waitForDisplayed();
+            const elemtImgSrc = await InvElementPage.elemtImg.getAttribute('src');
+            expect(imgElemtList).toEqual(elemtImgSrc);
+            await InvElementPage.backToProdBtn.click();
+        }
+    });
+
+    it('should add a product to the cart', async () => {
+        const addToCartBtn = await UserPage.invItems[0].$('#add-to-cart-sauce-labs-backpack');
+        await addToCartBtn.click();
+        await expect(UserPage.invItems[0].$('button')).toHaveId('remove-sauce-labs-backpack');
+    });
+
+    it('should remove a product to the cart', async () => {
+        const addToCartBtn = await UserPage.invItems[0].$('#remove-sauce-labs-backpack');
+        await addToCartBtn.click();
+        await expect(UserPage.invItems[0].$('button')).toHaveId('add-to-cart-sauce-labs-backpack');
     });
 });
 

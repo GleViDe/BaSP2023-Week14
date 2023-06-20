@@ -5,7 +5,6 @@ exports.config = {
     // ====================
     // WebdriverIO supports running e2e tests as well as unit and component tests.
     runner: 'local',
-    
     //
     // ==================
     // Specify Test Files
@@ -25,7 +24,8 @@ exports.config = {
     specs: [
         './test/pageobjects/*.js',
         './test/specs/standard-user.e2e.js',
-        './test/specs/locked-out-user.e2e.js'
+        './test/specs/locked-out-user.e2e.js',
+        './test/specs/problem-user.e2e.js'
     ],
     // Patterns to exclude.
     exclude: [
